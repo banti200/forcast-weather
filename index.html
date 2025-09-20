@@ -8,7 +8,7 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #4b6cb7, #182848); /* New gradient */
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
       color: #fff;
       display: flex;
       justify-content: center;
@@ -17,6 +17,7 @@
     }
 
     .card {
+      position: relative;
       background: rgba(255, 255, 255, 0.1);
       padding: 30px;
       border-radius: 20px;
@@ -25,6 +26,12 @@
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
       backdrop-filter: blur(12px);
       animation: fadeIn 1s ease-in-out;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
     @keyframes fadeIn {
@@ -34,8 +41,17 @@
 
     h1 {
       font-size: 26px;
+      margin-bottom: 8px;
+      background: linear-gradient(90deg, #ff9800, #ffd369);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h2 {
+      font-size: 18px;
       margin-bottom: 20px;
-      color: #ffd369;
+      font-weight: normal;
+      opacity: 0.9;
     }
 
     input {
@@ -50,18 +66,30 @@
     }
 
     button {
-      padding: 12px 24px;
+      padding: 12px 22px;
       border: none;
       border-radius: 25px;
-      background: #ff9800;
-      color: #fff;
       font-size: 15px;
       cursor: pointer;
       transition: 0.3s;
+      margin: 5px;
     }
 
-    button:hover {
-      background: #e67e00;
+    .check-btn {
+      background: #ff004c;
+      color: #fff;
+    }
+    .check-btn:hover {
+      background: #00a5e6;
+      transform: scale(1.05);
+    }
+
+    .reset-btn {
+      background: #f44336;
+      color: #fff;
+    }
+    .reset-btn:hover {
+      background: #d32f2f;
       transform: scale(1.05);
     }
 
@@ -85,18 +113,20 @@
       margin-top: 20px;
       font-size: 13px;
       color: #ddd;
+      opacity: 0.8;
     }
   </style>
 </head>
 <body>
   <div class="card">
-    <h1>🌤 Nayans architech</h1>
-       <h2>  Weather forcast</h2>
+    <h1>🌤 Nayankumar Artitech </h1>
+    <h2> Personal Weather Forecast</h2>
     <input type="text" id="city" placeholder="Enter city name">
     <br>
-    <button onclick="getWeather()">Check Weather</button>
+    <button class="check-btn" onclick="getWeather()">Check Weather</button>
+    <button class="reset-btn" onclick="resetWeather()">Reset</button>
     <div id="result"></div>
-    <footer>Made with ❤️ by Nayankumar</footer>
+    <footer>✨ Designed & Built by Nayankumar ✨</footer>
   </div>
 
   <script>
@@ -123,11 +153,11 @@
           resultDiv.innerHTML = `
             <div class="temp">${data.main.temp}°C</div>
             <img class="weather-icon" src="${icon}" alt="Weather icon">
-            <div><b>City:</b> ${data.name}</div>
-            <div><b>Condition:</b> ${data.weather[0].description}</div>
-            <div><b>Feels Like:</b> ${feelsLike}°C</div>
-            <div><b>Humidity:</b> ${data.main.humidity}%</div>
-            <div><b>Wind:</b> ${data.wind.speed} m/s</div>
+            <div><b>📍 City:</b> ${data.name}</div>
+            <div><b>☁ Condition:</b> ${data.weather[0].description}</div>
+            <div><b>🌡 Feels Like:</b> ${feelsLike}°C</div>
+            <div><b>💧 Humidity:</b> ${data.main.humidity}%</div>
+            <div><b>💨 Wind:</b> ${data.wind.speed} m/s</div>
             <div><small>📅 Last Updated: ${date}</small></div>
           `;
         } else {
@@ -138,6 +168,12 @@
         resultDiv.innerHTML = "❌ Error fetching weather data";
       }
     }
+
+    function resetWeather() {
+      document.getElementById("city").value = "";
+      document.getElementById("result").innerHTML = "";
+    }
   </script>
 </body>
 </html>
+
